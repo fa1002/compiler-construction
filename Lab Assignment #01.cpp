@@ -1,12 +1,23 @@
+#include <stdio.h>
 #include <string.h>
 #include <ctype.h>
-#include <stdio.h>
 
 void classifyToken(char str[10]) {
-    if (strcmp("for", str) == 0 || strcmp("while", str) == 0 || strcmp("do", str) == 0 ||
-        strcmp("int", str) == 0 || strcmp("float", str) == 0 || strcmp("char", str) == 0 ||
-        strcmp("double", str) == 0 || strcmp("static", str) == 0 || strcmp("switch", str) == 0 ||
-        strcmp("case", str) == 0) {
+    int isNumber = 1;
+    
+    for (int i = 0; i < strlen(str); i++) {
+        if (!isdigit(str[i])) {
+            isNumber = 0;
+            break;
+        }
+    }
+
+    if (isNumber) {
+        printf("| %-10s | Number           |\n", str);
+    } else if (strcmp("for", str) == 0 || strcmp("while", str) == 0 || strcmp("do", str) == 0 ||
+               strcmp("int", str) == 0 || strcmp("float", str) == 0 || strcmp("char", str) == 0 ||
+               strcmp("double", str) == 0 || strcmp("static", str) == 0 || strcmp("switch", str) == 0 ||
+               strcmp("case", str) == 0) {
         printf("| %-10s | Keyword          |\n", str);
     } else {
         printf("| %-10s | Identifier       |\n", str);
